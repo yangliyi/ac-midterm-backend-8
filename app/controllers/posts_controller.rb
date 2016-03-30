@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_post, :only => [:show, :destroy]
+  before_action :set_post, :only => [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.page(params[:page]).per(5)
@@ -22,6 +22,25 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
+  end
+
+  def edit
+    if @post.user != current_user
+      flash[:alert] = '抱歉你不是作者不能編輯'
+      redirect_to posts_path
+    end
+  end
+
+  def update
+    if @post.user == current_user
+      @post.update(post_params)
+
+      flash[:notice] = '成功更新訊息'
+
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
   end
 
   def destroy
