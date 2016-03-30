@@ -1,1 +1,17 @@
+<h1>災情訊息</h1>
+<table>
+  <tr>
+    <th>標題</th>
+    <th>分類</th>
+    <th>張貼時間</th>
+  </tr>
+<% @posts.each do |p| %>
+  <tr>
+    <td><%= p.topic %></td>
+    <td><%= p.category.name %></td>
+    <td><%= p.created_at %></td>
+  </tr>
+<% end %>
+</table>
+
 <%= link_to '張貼新災情資訊', new_post_path %>
