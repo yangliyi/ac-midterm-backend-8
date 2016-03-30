@@ -1,0 +1,16 @@
+<h1><%= @post.topic %></h1>
+<p><%= @post.category.name %></p>
+<p><%= @post.content %></p>
+
+<%= form_for [@post, @comment] do |f| %>
+    <p>
+      <%= f.text_area :content %>
+    </p>
+    <%= f.submit %>
+<% end %>
+
+<h3>所有留言</h3>
+
+<% @post.comments.each do |c| %>
+  <p><%= c.content %></p>
+<% end %>

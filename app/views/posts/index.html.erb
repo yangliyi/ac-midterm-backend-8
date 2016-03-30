@@ -7,7 +7,7 @@
   </tr>
 <% @posts.each do |p| %>
   <tr>
-    <td><%= p.topic %></td>
+    <td><%= link_to p.topic, post_path(p) %></td>
     <td><%= p.category.name %></td>
     <td><%= p.created_at %></td>
   </tr>
