@@ -1,0 +1,18 @@
+<%= form_for @post do |f| %>
+
+    <p>
+      <%= f.label "標題" %>
+      <%= f.text_field :topic %>
+    </p>
+    <p>
+      <%= f.label "分類" %>
+      <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+    </p>
+    <p>
+      <%= f.label "內文" %>
+      <%= f.text_area :content %>
+    </p>
+
+   <%= f.submit %>
+
+<% end %>
