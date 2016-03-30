@@ -14,10 +14,13 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
-    @post.save
 
-    flash[:notice] = '成功張貼訊息'
-    redirect_to posts_path
+    if @post.save
+      flash[:notice] = '成功張貼訊息'
+      redirect_to posts_path
+    else
+      render :new
+    end
   end
 
   def show
@@ -33,11 +36,13 @@ class PostsController < ApplicationController
 
   def update
     if @post.user == current_user
-      @post.update(post_params)
+      if @post.update(post_params)
 
-      flash[:notice] = '成功更新訊息'
-
-      redirect_to post_path(@post)
+        flash[:notice] = '成功更新訊息'
+        redirect_to post_path(@post)
+      else
+        render :edit
+      end
     else
       render :edit
     end
