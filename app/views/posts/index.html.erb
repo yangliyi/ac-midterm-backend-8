@@ -4,12 +4,16 @@
     <th>標題</th>
     <th>分類</th>
     <th>張貼時間</th>
+    <th>動作</th>
   </tr>
 <% @posts.each do |p| %>
   <tr>
     <td><%= link_to p.topic, post_path(p) %></td>
     <td><%= p.category.name %></td>
     <td><%= p.created_at %></td>
+    <% if p.user == current_user %>
+    <td><%= link_to '刪除', post_path(p), :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

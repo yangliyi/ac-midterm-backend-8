@@ -12,5 +12,12 @@
 <h3>所有留言</h3>
 
 <% @post.comments.each do |c| %>
-  <p><%= c.content %></p>
+  <p>
+    <%= c.content %>
+    <% if c.user == current_user %>
+    <%= link_to  '刪除', post_comment_path(@post, c), :method => :delete %>
+    <% end %>
+  </p>
 <% end %>
+
+<%= link_to '回到首頁', posts_path %>
